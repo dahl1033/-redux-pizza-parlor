@@ -1,0 +1,10 @@
+.pizzaPic {
+  width: 100px;
+  height: 100px;
+}
+.pizzaDiv {
+  display: inline-block;
+  width: 25%;
+  height: 20%;
+  border: 1px solid black;
+}
