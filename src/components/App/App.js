@@ -3,6 +3,7 @@ import axios from 'axios';
 import './App.css';
 import { HashRouter as Router, Route } from 'react-router-dom';
 import { connect } from 'react-redux'; 
+import PizzaList from '../PizzaList/PizzaList';
 
 
 class App extends Component {
@@ -14,7 +15,7 @@ class App extends Component {
   // get pizzas from DB and send to Redux state
   refreshPizzaList = () => {
     axios.get('/api/pizza').then((response) => {
-      console.log('in refreshPizzaList, response: ', response);
+      console.log('in refreshPizzaList, response: ', response.data);
       this.props.dispatch({
         type: 'ADD_PIZZA_TO_STORE',
         payload: response.data
@@ -31,7 +32,8 @@ class App extends Component {
           <h1 className="App-title">Prime Pizza</h1>
         </header>
         <br/>
-        <img src="images/pizza_photo.png"/>
+        {/* <img src="images/pizza_photo.png"/> */}
+        <Route exact path="/" component={PizzaList}/>
         <p>Pizza is great.</p>
       </div>
       </Router>
