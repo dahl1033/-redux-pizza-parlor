@@ -3,15 +3,24 @@ import './PizzaItem.css';
 import {connect} from 'react-redux';
 
 class PizzaItem extends Component {
+
+// componentDidMount = () => {
+//     this.orderTotal();
+// }
+
+
     
     addToCart = () => {
         console.log('This is the addToCart');
         //dispatch here
+        
         this.props.dispatch({
             type: 'ADD_PIZZA_TO_CART',
             payload: this.props.pizza,
         })
+        this.props.orderTotal();
     }
+
     
     render(){
         return(
