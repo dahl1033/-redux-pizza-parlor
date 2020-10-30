@@ -4,6 +4,7 @@ import './App.css';
 import { HashRouter as Router, Route } from 'react-router-dom';
 import { connect } from 'react-redux'; 
 import PizzaList from '../PizzaList/PizzaList';
+import Footer from '../Footer/Footer';
 
 
 class App extends Component {
@@ -26,6 +27,7 @@ class App extends Component {
 
   render() {
     return (
+      <>
       <Router>
       <div className="App">
         <header className="App-header">
@@ -35,8 +37,16 @@ class App extends Component {
         {/* <img src="images/pizza_photo.png"/> */}
         <Route exact path="/" component={PizzaList}/>
         <p>Pizza is great.</p>
+
+      <Footer/>
+
       </div>
+
+
       </Router>
+
+
+      </>
     );
   }
 }
