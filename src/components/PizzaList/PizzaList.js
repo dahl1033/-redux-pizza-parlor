@@ -12,7 +12,9 @@ class PizzaList extends Component {
             {this.props.reduxState.pizzaReducer.map((pizza, index) => {
                 return (
                   <PizzaItem pizza={pizza} />
-            )})}
+                )
+              })
+            }
           </>
         )
     }

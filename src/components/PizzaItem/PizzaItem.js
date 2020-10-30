@@ -1,7 +1,18 @@
 import React,{ Component } from 'react';
 import './PizzaItem.css';
+import {connect} from 'react-redux';
 
 class PizzaItem extends Component {
+    
+    addToCart = () => {
+        console.log('This is the addToCart');
+        //dispatch here
+        this.props.dispatch({
+            type: 'ADD_PIZZA_TO_CART',
+            payload: this.props.pizza,
+        })
+    }
+    
     render(){
         return(
             <div>
@@ -10,6 +21,7 @@ class PizzaItem extends Component {
                     <h2>{this.props.pizza.name}</h2>
                     <p>{this.props.pizza.description}</p>
                     <p>{this.props.pizza.price}</p>
+                    <button onClick={this.addToCart}>Add</button>
                   </div>
             </div>
 
@@ -17,4 +29,8 @@ class PizzaItem extends Component {
     }
 }
 
-export default PizzaItem;
+const mapStateToProps = (reduxState) => ({
+  reduxState
+})
+
+export default connect(mapStateToProps)(PizzaItem);

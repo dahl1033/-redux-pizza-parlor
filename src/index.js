@@ -14,9 +14,19 @@ const pizzaReducer = (state = [], action) => {
     return state
 }
 
+const cartReducer = (state = [], action) => {
+    switch(action.type){
+        case 'ADD_PIZZA_TO_CART':
+            return [...state, {name: action.payload.name, price: action.payload.price}];
+        default: 
+            return state;
+    }
+}
+
 const storeInstance = createStore(
     combineReducers({
-        pizzaReducer
+        pizzaReducer,
+        cartReducer
     }),
     applyMiddleware(logger)
 )
