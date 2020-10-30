@@ -4,14 +4,30 @@ import './App.css';
 import { HashRouter as Router, Route } from 'react-router-dom';
 import { connect } from 'react-redux'; 
 import PizzaList from '../PizzaList/PizzaList';
-import Footer from '../Footer/Footer';
+import Header from '../Header/Header';
+import Cart from '../Cart/Cart';
 
 
 class App extends Component {
 
   componentDidMount() {
     this.refreshPizzaList();
+    this.orderTotal();
   }
+
+  orderTotal = () => {
+    let orderTotal = 0;
+    {this.props.reduxState.cartReducer.map((pizza, index) => {
+       orderTotal += Number(pizza.price);
+        return orderTotal;
+    })}
+    console.log("order total is", orderTotal)
+    this.props.dispatch({
+        type: 'ORDER_TOTAL',
+        payload: orderTotal,
+    })
+    
+}
 
   // get pizzas from DB and send to Redux state
   refreshPizzaList = () => {
@@ -29,20 +45,12 @@ class App extends Component {
     return (
       <>
       <Router>
-      <div className="App">
-        <header className="App-header">
-          <h1 className="App-title">Prime Pizza</h1>
-        </header>
-        <br/>
-        {/* <img src="images/pizza_photo.png"/> */}
-        <Route exact path="/" component={PizzaList}/>
-        <p>Pizza is great.</p>
-
-      <Footer/>
-
-      </div>
-
-
+        <div className="App">
+          <Header/>
+          {/* <img src="images/pizza_photo.png"/> */}
+          <Route exact path="/" component={PizzaList}/>
+          <Route path="/cart" component={Cart} />
+        </div>
       </Router>
 
 
@@ -51,4 +59,8 @@ class App extends Component {
   }
 }
 
-export default connect()(App);
+const mapStateToProps = (reduxState) => ({
+  reduxState
+})
+
+export default connect(mapStateToProps)(App);
